@@ -13,6 +13,7 @@ export default function App() {
         ...currentTodos, {id: crypto.randomUUID(), title: newItem, completed: false}, 
       ]
     })
+    setNewItem("")
   }
 
   return (
@@ -27,13 +28,15 @@ export default function App() {
   <h1 className="header"> To-Do List</h1>
   <ul className="list">
     {todos.map(todo => {
-      return <li>
-      <label>
-        <input type="checkbox" checked={todo.completed}/>
-        {todo.title}
-      </label>
-      <button className="btn btn-danger">Delete</button>
-    </li>
+      return (
+      <li key={todo.id}>
+        <label>
+          <input type="checkbox" checked={todocompleted}/>
+          {todo.title}
+        </label>
+        <button className="btn btn-danger">Delete</button>
+      </li>
+    )
     })}
   </ul>
   </>
