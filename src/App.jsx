@@ -15,6 +15,7 @@ export default function App() {
     })
     setNewItem("")
   }
+
   function toggleTodo(id, completed) {
     setTodos(currentTodos => {
       return currentTodos.map(todo => {
@@ -23,6 +24,12 @@ export default function App() {
         }
         return todo
       })
+    })
+  }
+
+  function deleteTodo(id) {
+    setTodos(currentTodos => {
+      return currentTodos.filter(todo => todo.id !== id)
     })
   }
 
@@ -44,7 +51,7 @@ export default function App() {
           <input type="checkbox" checked={todocompleted} onChange={e => toggleTodo(todo.id, e.target.checked)}/>
           {todo.title}
         </label>
-        <button className="btn btn-danger">Delete</button>
+        <button className="btn btn-danger" onClick={() => deleteTodo(todo.id)}>Delete</button>
       </li>
     )
     })}
