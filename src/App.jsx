@@ -6,23 +6,12 @@ export default function App() {
   const [newItem, setNewItem] = useState("")
   const [todos, setTodos] = useState([])
 
-  function addTodo(title){
+  function addTodo(newItem){
     setTodos((currentTodos) => {
       return [
         ...currentTodos, {id: crypto.randomUUID(), title: newItem, completed: false}, 
       ]
     })
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault()
-
-    setTodos((currentTodos) => {
-      return [
-        ...currentTodos, {id: crypto.randomUUID(), title: newItem, completed: false}, 
-      ]
-    })
-    setNewItem("")
   }
 
   function toggleTodo(id, completed) {
@@ -44,7 +33,7 @@ export default function App() {
   
   return (
     <>
-    <NewTodoForm onSubmit={addTodo}/> 
+    <NewTodoForm onSubmit={addTodo} /> 
     <h1 className="header"> To-Do List</h1>
     <ul className="list">
       {todos.length === 0 && "No Todos"}
@@ -52,7 +41,7 @@ export default function App() {
         return (
         <li key={todo.id}>
           <label>
-            <input type="checkbox" checked={todocompleted} onChange={e => toggleTodo(todo.id, e.target.checked)}/>
+            <input type="checkbox" checked={todo.completed} onChange={e => toggleTodo(todo.id, e.target.checked)}/>
             {todo.title}
           </label>
           <button className="btn btn-danger" onClick={() => deleteTodo(todo.id)}>Delete</button>
