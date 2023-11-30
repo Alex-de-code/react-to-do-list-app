@@ -1,5 +1,6 @@
 import { useState } from "react"
 import "../src/styles.css"
+import { NewTodoForm } from "./NewTodoForm"
 
 export default function App() {
   const [newItem, setNewItem] = useState("")
@@ -32,31 +33,25 @@ export default function App() {
       return currentTodos.filter(todo => todo.id !== id)
     })
   }
-
+  
   return (
     <>
-  <form onSubmit={handleSubmit} className="new-item-form">
-    <div className="form-row">
-      <label htmlFor="item">New Item</label>
-      <input value={newItem} onChange={e => setNewItem(e.target.value)} type="text" id="item"/>
-    </div>
-    <button className="btn">Add</button>
-  </form>
-  <h1 className="header"> To-Do List</h1>
-  <ul className="list">
-    {todos.length === 0 && "No Todos"}
-    {todos.map(todo => {
-      return (
-      <li key={todo.id}>
-        <label>
-          <input type="checkbox" checked={todocompleted} onChange={e => toggleTodo(todo.id, e.target.checked)}/>
-          {todo.title}
-        </label>
-        <button className="btn btn-danger" onClick={() => deleteTodo(todo.id)}>Delete</button>
-      </li>
-    )
-    })}
-  </ul>
-  </>
+    <NewTodoForm /> 
+    <h1 className="header"> To-Do List</h1>
+    <ul className="list">
+      {todos.length === 0 && "No Todos"}
+      {todos.map(todo => {
+        return (
+        <li key={todo.id}>
+          <label>
+            <input type="checkbox" checked={todocompleted} onChange={e => toggleTodo(todo.id, e.target.checked)}/>
+            {todo.title}
+          </label>
+          <button className="btn btn-danger" onClick={() => deleteTodo(todo.id)}>Delete</button>
+        </li>
+      )
+      })}
+    </ul>
+    </>
   )
 }
